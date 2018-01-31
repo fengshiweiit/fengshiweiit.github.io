@@ -82,11 +82,11 @@
 <meta name="description" content="项目中遇到的bug总结 1.基于反射的poi导出获得order中的所有属性Field[] fields = orderClass.getDeclaredFields(); List&amp;lt;String&amp;gt; fieldsName = Arrays.stream(fields).map(Field::getName).collect(toList()); 创建行和列，将传来的类型和当前属性进行对比">
 <meta property="og:type" content="article">
 <meta property="og:title" content="POI导出bug总结">
-<meta property="og:url" content="http://albertwei.site/2018/01/23/FirstBlog/index.html">
+<meta property="og:url" content="http://albertwei.site/2018/01/23/POI/index.html">
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
 <meta property="og:description" content="项目中遇到的bug总结 1.基于反射的poi导出获得order中的所有属性Field[] fields = orderClass.getDeclaredFields(); List&amp;lt;String&amp;gt; fieldsName = Arrays.stream(fields).map(Field::getName).collect(toList()); 创建行和列，将传来的类型和当前属性进行对比">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-23T06:34:22.907Z">
+<meta property="og:updated_time" content="2018-01-24T08:28:00.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="POI导出bug总结">
 <meta name="twitter:description" content="项目中遇到的bug总结 1.基于反射的poi导出获得order中的所有属性Field[] fields = orderClass.getDeclaredFields(); List&amp;lt;String&amp;gt; fieldsName = Arrays.stream(fields).map(Field::getName).collect(toList()); 创建行和列，将传来的类型和当前属性进行对比">
@@ -119,7 +119,7 @@
 
 
 
-  <link rel="canonical" href="http://albertwei.site/2018/01/23/FirstBlog/"/>
+  <link rel="canonical" href="http://albertwei.site/2018/01/23/POI/"/>
 
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/01/23/FirstBlog/">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/01/23/POI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AlbertWei">
@@ -346,6 +346,8 @@ public RestTemplate restTemplate(
 
     return restTemplate;
 }
+3.反射只能得到本类的属性。继承的baseEntity的属性得不到，这里的做法是直接把父类的
+属性重写了一遍（巨low，反射有方法可以获得父类的属性）。
 </code></pre>
       
     </div>
@@ -455,7 +457,7 @@ public RestTemplate restTemplate(
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -232,6 +232,285 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/01/25/RabbitMQ/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AlbertWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AlbertWei's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/25/RabbitMQ/" itemprop="url">RabbitMQ</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T10:39:29+08:00">
+                2018-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="RabbitMQ基础"><a href="#RabbitMQ基础" class="headerlink" title="RabbitMQ基础"></a><center>RabbitMQ基础</center></h1><hr>
+<h2 id="1-RabbitMQ"><a href="#1-RabbitMQ" class="headerlink" title="1.RabbitMQ"></a>1.RabbitMQ</h2><pre><code>rabbitMQ是基于amqp协议的一种消息队列。
+</code></pre><hr>
+<h2 id="2-Amqp和jms-kafka-activeMQ-的区别"><a href="#2-Amqp和jms-kafka-activeMQ-的区别" class="headerlink" title="2.Amqp和jms(kafka,activeMQ)的区别"></a>2.Amqp和jms(kafka,activeMQ)的区别</h2><h5 id="1-通信机制的区别"><a href="#1-通信机制的区别" class="headerlink" title="1.通信机制的区别"></a>1.通信机制的区别</h5><pre><code>JMS:消息生产者和消息消费者必须知道对方的Queue
+AMQP: 消息生产者和消息消费者无须知道对方的Queue,消息生产者将Exchange通过Route key和任意Queue绑定。消息消费者通过Route key从任意Queue中获取Exchange.
+</code></pre><h5 id="2-消息传输机制的区别"><a href="#2-消息传输机制的区别" class="headerlink" title="2.消息传输机制的区别"></a>2.消息传输机制的区别</h5><pre><code>JMS:只支持点对点的通信模式和订阅广播的通信模式。
+Amqp:有4中交换机分别代表着不同的通信模式
+    1.Direct直连交换机：直连交换机是一种带路由功能的交互机，一个队列通过routing_key与一个交换机绑定，当消息被发送的时候，需要指定一个routing_key，这个消息被送达交换机的时候，就会被交换机送到指定的队列里面去。同样一个routing_key也是支持应用到多个队列中的，当一个交换机绑定多个队列时，消息就会被送到对应的队列去处理。
+    2.Topic主题交换机：直连交换机的routing_key方案非常简单，如果我们希望一条消息发送给多个队列，那么这个交换机需要绑定上非常多的routing_key，假设每个交换机上都绑定一堆的routing_key连接到各个队列上。那么消息队列的管理就会异常的困难所以RabbitMQ提供了一种主题交换机，发送到主题交换机上的消息需要携带指定规则的routing_key，主题交换机会根据这个规则将数据发送到对应的(多个)队列上。
+    3.Fanout扇形交换机：扇形交换机是最基本的交换机类型，它做的事情很简单--广播信息。Fanout交换机会把接收到的消息全部转发到绑定的队列上。因为广播不需要“思考”，所以Fanout交换机是四种交换机中速度最快的
+    4.Header交换机：设置header attribute参数类型的交换机。(基本不用)
+</code></pre><h2 id="3-springBoot整合RabbitMQ"><a href="#3-springBoot整合RabbitMQ" class="headerlink" title="3.springBoot整合RabbitMQ"></a>3.springBoot整合RabbitMQ</h2><h5 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1.添加依赖"></a>1.添加依赖</h5><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><h5 id="2-代码实现（这里还没有具体弄懂exchange绑定queue，感觉怎么样都可以调成功）"><a href="#2-代码实现（这里还没有具体弄懂exchange绑定queue，感觉怎么样都可以调成功）" class="headerlink" title="2.代码实现（这里还没有具体弄懂exchange绑定queue，感觉怎么样都可以调成功）"></a>2.代码实现（这里还没有具体弄懂exchange绑定queue，感觉怎么样都可以调成功）</h5>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/01/24/Summarize-Jpa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AlbertWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AlbertWei's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/24/Summarize-Jpa/" itemprop="url">Summarize Jpa</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T16:26:42+08:00">
+                2018-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Jpa中遇到的知识点总结"><a href="#Jpa中遇到的知识点总结" class="headerlink" title="Jpa中遇到的知识点总结"></a><center>Jpa中遇到的知识点总结</center></h1><hr>
+<h2 id="1-jpa实现limit的方法（自己定义一个pageable）"><a href="#1-jpa实现limit的方法（自己定义一个pageable）" class="headerlink" title="1.jpa实现limit的方法（自己定义一个pageable）"></a>1.jpa实现limit的方法（自己定义一个pageable）</h2><pre><code>final int currentPage = 0;
+final int pageSize = 5000;
+Sort sort = new Sort(Sort.Direction.DESC, &quot;createTime&quot;);
+Pageable pageable = new PageRequest(currentPage, pageSize, sort);
+Page&lt;Order&gt; page = orderRepository.findAll(spec, pageable);
+List&lt;Order&gt; list = page.getContent();
+</code></pre><hr>
+<h2 id="2-jpa实现limit的方法2"><a href="#2-jpa实现limit的方法2" class="headerlink" title="2.jpa实现limit的方法2"></a>2.jpa实现limit的方法2</h2><pre><code>//这里必须加by
+例：userRepository.findTop10By();
+</code></pre><hr>
+<h2 id="3-jpa的一级缓存"><a href="#3-jpa的一级缓存" class="headerlink" title="3.jpa的一级缓存"></a>3.jpa的一级缓存</h2><pre><code>//jpa的查询方法生效后 默认会缓存这个查询结果
+for (Integer organizationId : listMap.keySet()) {
+        OrganizationManager organizationManager = organizationManagerRepository.findById(organizationId);
+        if (organizationManager == null){
+            log.error(&quot;组织不存在&quot;);
+            throw new MessageException(&quot;组织不存在&quot;);
+        }
+        //这里会循环查询到resources
+        List&lt;Resource&gt; resources = userOrganizationManagerRoleRepository.findResourceByUserIdAndOrganizationId(userId, organizationId);
+        //清一级缓存
+        entityManager.clear();
+        List&lt;Resource&gt; list = buildTree(resources);
+        //对resource进行了操作，如果不清一级缓存会导致查询的结果还是上一次循环的结果
+        map1.put(organizationId + organizationManager.getType(), list);
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/01/23/SpringCloud/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -445,7 +724,7 @@ public class HystrixDemo implements FeignClientDemo{
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/01/23/FirstBlog/">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/01/23/POI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AlbertWei">
@@ -464,7 +743,7 @@ public class HystrixDemo implements FeignClientDemo{
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/23/FirstBlog/" itemprop="url">POI导出bug总结</a></h1>
+                <a class="post-title-link" href="/2018/01/23/POI/" itemprop="url">POI导出bug总结</a></h1>
         
 
         <div class="post-meta">
@@ -563,6 +842,8 @@ public RestTemplate restTemplate(
 
     return restTemplate;
 }
+3.反射只能得到本类的属性。继承的baseEntity的属性得不到，这里的做法是直接把父类的
+属性重写了一遍（巨low，反射有方法可以获得父类的属性）。
 </code></pre>
           
         
@@ -644,7 +925,7 @@ public RestTemplate restTemplate(
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
