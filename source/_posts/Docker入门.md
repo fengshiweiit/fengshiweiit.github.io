@@ -5,7 +5,6 @@ tags:
 ---
 # <center> Dcoker入门</center>
 ---
-## 1.Docker主要包含的组件
-##### 1.Docker daemon（Docker守护进程）
-# <center>卡死了！</center>
-
+## 1.linux环境安装docker
+##### linux环境：centos7，64位
+## <center>卡死了</center> 

@@ -120,3 +120,38 @@ tags:
     feign:
         hystrix:
             enabled: true
+---
+## 配置swagger
+---
+##### 添加依赖（注：这里如果是2.2以下的版本好像是会出空指针异常的）
+        <dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+##### swagger配置文件
+    @Bean
+    public Docket buildDocket(){
+        ParameterBuilder tokenPar = new ParameterBuilder();
+        //配置除了参数以外的参数，这里是配置header
+        tokenPar.name("X-CURRENT-USER-ID")
+                .description("用户id").
+                modelRef(new ModelRef("string"))
+                .parameterType("header").required(false).build();
+        List<Parameter> aParameters = new ArrayList<Parameter>();
+        aParameters.add(tokenPar.build());
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                //配置扫描包
+                .apis(RequestHandlerSelectors.basePackage("com.provider.provider.controller"))
+                .paths(PathSelectors.any())
+                .build()
+                //添加设置的参数
+                .globalOperationParameters(aParameters)
+    ｝
