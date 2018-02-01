@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
 <meta property="og:description" content="SpringCloud入门 服务注册中心Eureka 引入依赖&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka-server&amp;lt;/artifactId&amp;gt; &amp;lt;/dependen">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-23T07:23:41.462Z">
+<meta property="og:updated_time" content="2018-02-01T01:26:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringCloud">
 <meta name="twitter:description" content="SpringCloud入门 服务注册中心Eureka 引入依赖&amp;lt;dependency&amp;gt;     &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;     &amp;lt;artifactId&amp;gt;spring-cloud-starter-eureka-server&amp;lt;/artifactId&amp;gt; &amp;lt;/dependen">
@@ -393,6 +393,38 @@ public class HystrixDemo implements FeignClientDemo{
 </code></pre><h5 id="配置文件-2"><a href="#配置文件-2" class="headerlink" title="配置文件"></a>配置文件</h5><pre><code>feign:
     hystrix:
         enabled: true
+</code></pre><hr>
+<h2 id="配置swagger"><a href="#配置swagger" class="headerlink" title="配置swagger"></a>配置swagger</h2><hr>
+<h5 id="添加依赖（注：这里如果是2-2以下的版本好像是会出空指针异常的）"><a href="#添加依赖（注：这里如果是2-2以下的版本好像是会出空指针异常的）" class="headerlink" title="添加依赖（注：这里如果是2.2以下的版本好像是会出空指针异常的）"></a>添加依赖（注：这里如果是2.2以下的版本好像是会出空指针异常的）</h5><pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+    &lt;version&gt;2.7.0&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+    &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+    &lt;version&gt;2.7.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><h5 id="swagger配置文件"><a href="#swagger配置文件" class="headerlink" title="swagger配置文件"></a>swagger配置文件</h5><pre><code>@Bean
+public Docket buildDocket(){
+    ParameterBuilder tokenPar = new ParameterBuilder();
+    //配置除了参数以外的参数，这里是配置header
+    tokenPar.name(&quot;X-CURRENT-USER-ID&quot;)
+            .description(&quot;用户id&quot;).
+            modelRef(new ModelRef(&quot;string&quot;))
+            .parameterType(&quot;header&quot;).required(false).build();
+    List&lt;Parameter&gt; aParameters = new ArrayList&lt;Parameter&gt;();
+    aParameters.add(tokenPar.build());
+    return new Docket(DocumentationType.SWAGGER_2)
+            .select()
+            //配置扫描包
+            .apis(RequestHandlerSelectors.basePackage(&quot;com.provider.provider.controller&quot;))
+            .paths(PathSelectors.any())
+            .build()
+            //添加设置的参数
+            .globalOperationParameters(aParameters)
+｝
 </code></pre>
       
     </div>
@@ -506,7 +538,7 @@ public class HystrixDemo implements FeignClientDemo{
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -543,7 +575,7 @@ public class HystrixDemo implements FeignClientDemo{
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud入门"><span class="nav-number">1.</span> <span class="nav-text">SpringCloud入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务注册中心Eureka"><span class="nav-number">1.1.</span> <span class="nav-text">服务注册中心Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引入依赖"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件（此处用的是properties）"><span class="nav-number">1.1.0.0.2.</span> <span class="nav-text">配置文件（此处用的是properties）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务提供者provider"><span class="nav-number">1.2.</span> <span class="nav-text">服务提供者provider</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引入依赖-1"><span class="nav-number">1.2.0.0.1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件"><span class="nav-number">1.2.0.0.2.</span> <span class="nav-text">配置文件</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务消费者consumer"><span class="nav-number">1.3.</span> <span class="nav-text">服务消费者consumer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引入依赖-2"><span class="nav-number">1.3.0.0.1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件-1"><span class="nav-number">1.3.0.0.2.</span> <span class="nav-text">配置文件</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ribbon实现负载均衡"><span class="nav-number">1.4.</span> <span class="nav-text">ribbon实现负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加依赖"><span class="nav-number">1.4.0.0.1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置restTemplate的负载均衡"><span class="nav-number">1.4.0.0.2.</span> <span class="nav-text">设置restTemplate的负载均衡</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件-配置连接和处理超时"><span class="nav-number">1.4.0.0.3.</span> <span class="nav-text">配置文件(配置连接和处理超时)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feign默认实现了负载均衡和断路器功能（这里我理解为整合了ribbon-hystrix和restTemplate）"><span class="nav-number">1.5.</span> <span class="nav-text">feign默认实现了负载均衡和断路器功能（这里我理解为整合了ribbon,hystrix和restTemplate）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加依赖-1"><span class="nav-number">1.5.0.0.1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#feign调用微服务"><span class="nav-number">1.5.0.0.2.</span> <span class="nav-text">feign调用微服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件-2"><span class="nav-number">1.5.0.0.3.</span> <span class="nav-text">配置文件</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud入门"><span class="nav-number">1.</span> <span class="nav-text">SpringCloud入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务注册中心Eureka"><span class="nav-number">1.1.</span> <span class="nav-text">服务注册中心Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引入依赖"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件（此处用的是properties）"><span class="nav-number">1.1.0.0.2.</span> <span class="nav-text">配置文件（此处用的是properties）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务提供者provider"><span class="nav-number">1.2.</span> <span class="nav-text">服务提供者provider</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引入依赖-1"><span class="nav-number">1.2.0.0.1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件"><span class="nav-number">1.2.0.0.2.</span> <span class="nav-text">配置文件</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务消费者consumer"><span class="nav-number">1.3.</span> <span class="nav-text">服务消费者consumer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引入依赖-2"><span class="nav-number">1.3.0.0.1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件-1"><span class="nav-number">1.3.0.0.2.</span> <span class="nav-text">配置文件</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ribbon实现负载均衡"><span class="nav-number">1.4.</span> <span class="nav-text">ribbon实现负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加依赖"><span class="nav-number">1.4.0.0.1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置restTemplate的负载均衡"><span class="nav-number">1.4.0.0.2.</span> <span class="nav-text">设置restTemplate的负载均衡</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件-配置连接和处理超时"><span class="nav-number">1.4.0.0.3.</span> <span class="nav-text">配置文件(配置连接和处理超时)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feign默认实现了负载均衡和断路器功能（这里我理解为整合了ribbon-hystrix和restTemplate）"><span class="nav-number">1.5.</span> <span class="nav-text">feign默认实现了负载均衡和断路器功能（这里我理解为整合了ribbon,hystrix和restTemplate）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加依赖-1"><span class="nav-number">1.5.0.0.1.</span> <span class="nav-text">添加依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#feign调用微服务"><span class="nav-number">1.5.0.0.2.</span> <span class="nav-text">feign调用微服务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置文件-2"><span class="nav-number">1.5.0.0.3.</span> <span class="nav-text">配置文件</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置swagger"><span class="nav-number">1.6.</span> <span class="nav-text">配置swagger</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#添加依赖（注：这里如果是2-2以下的版本好像是会出空指针异常的）"><span class="nav-number">1.6.0.0.1.</span> <span class="nav-text">添加依赖（注：这里如果是2.2以下的版本好像是会出空指针异常的）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#swagger配置文件"><span class="nav-number">1.6.0.0.2.</span> <span class="nav-text">swagger配置文件</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
