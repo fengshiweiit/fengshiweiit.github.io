@@ -42,6 +42,12 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
+
+links_title: 友情链接
+links_layout: block
+links: 
+  xiongyufeng的博客: http://rufer.site
+links_icon: link  
   
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
