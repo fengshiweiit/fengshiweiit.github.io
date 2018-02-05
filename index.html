@@ -303,8 +303,57 @@
       
         
           
-            <h1 id="Dcoker入门"><a href="#Dcoker入门" class="headerlink" title=" Dcoker入门"></a><center> Dcoker入门</center></h1><hr>
-<h2 id="1-linux环境安装docker"><a href="#1-linux环境安装docker" class="headerlink" title="1.linux环境安装docker"></a>1.linux环境安装docker</h2><h5 id="linux环境：centos7，64位"><a href="#linux环境：centos7，64位" class="headerlink" title="linux环境：centos7，64位"></a>linux环境：centos7，64位</h5><h2 id="卡死了"><a href="#卡死了" class="headerlink" title="卡死了"></a><center>卡死了</center></h2>
+            <h1 id="Dcoker入门"><a href="#Dcoker入门" class="headerlink" title=" Dcoker入门"></a><center> Dcoker入门</center></h1><h2 id="Docker-基本命令"><a href="#Docker-基本命令" class="headerlink" title="Docker 基本命令"></a>Docker 基本命令</h2><pre><code>docker run                         启动一个容器
+docker search                      搜索容器
+docker pull                        从dockerHub下载镜像
+docker images                      列出docker所有的镜像
+docker ps                          列出所有正在运行的容器
+docker ps -a                       列出所有的容器
+docker ps -l                       列出最新创建的容器
+docker stop                        停止一个容器
+docker kill                        强制停止一个容器
+docker restart                     重新启动一个容器
+docker attach                      进入一个容器
+docker rmi                         删除镜像
+docker rm                          删除容器
+docker rm $(docker ps -a -q)       删除所有容器
+docker push                        将容器发到dockerHub
+docker exec                        进入一个容器
+dokcer logs                        查看容器的日志信息
+待补充。。。。。。。
+</code></pre><hr>
+<h2 id="1-搜索并下载一个镜像"><a href="#1-搜索并下载一个镜像" class="headerlink" title="1.搜索并下载一个镜像"></a>1.搜索并下载一个镜像</h2><pre><code>docker search java 搜索java镜像
+docker pull java:1.8（默认下载最新的镜像，添加：1.8指定版本）
+</code></pre><hr>
+<h2 id="2-启动一个镜像（容器）"><a href="#2-启动一个镜像（容器）" class="headerlink" title="2.启动一个镜像（容器）"></a>2.启动一个镜像（容器）</h2><pre><code>docker run XXX （注：遇到了容器状态为exited状态的，其实是此容器执行已经结束了）
+例：docker run echo &quot;aaa&quot; 这样输出一个字符串  状态为exited
+若想将一个服务挂到docker下,状态为up
+例：docker run -d nginx (将nginx在后台启动)   
+</code></pre><h2 id="3-使用DockerFile构建Docker镜像"><a href="#3-使用DockerFile构建Docker镜像" class="headerlink" title="3.使用DockerFile构建Docker镜像"></a>3.使用DockerFile构建Docker镜像</h2><pre><code>DockerFile其实就是一个描述了Docker若干条指令的文本文件
+构建镜像：docker build -t 仓库名称/镜像名称 Dockerfile相对位置
+启动镜像：docker run -d -p xx:xx 仓库名称/镜像名称
+遇到的问题：
+    1.启动失败：容器的状态为EXIT,看Dockerfile中jar的配置路径，容器要在后台运行 -d
+</code></pre><hr>
+<h2 id="4-使用maven构建docker镜像"><a href="#4-使用maven构建docker镜像" class="headerlink" title="4.使用maven构建docker镜像"></a>4.使用maven构建docker镜像</h2><pre><code>&lt;plugin&gt;
+    &lt;groupId&gt;com.spotify&lt;/groupId&gt;
+    &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;0.4.13&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;imageName&gt;demo/provider&lt;/imageName&gt;
+        //指定Dockerfile的文件路径
+        &lt;dockerDirectory&gt;${basedir}/src/main/docker&lt;/dockerDirectory&gt; 
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;targetPath&gt;/&lt;/targetPath&gt;
+                &lt;directory&gt;${project.build.directory}&lt;/directory&gt;
+                &lt;include&gt;${project.build.finalName}&lt;/include&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;
+mvn clean package docker：build
+</code></pre><h2 id="5-Docker-compose-编排微服务"><a href="#5-Docker-compose-编排微服务" class="headerlink" title="5.Docker compose 编排微服务"></a>5.Docker compose 编排微服务</h2>
           
         
       
