@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
 <meta property="og:description" content="Dcoker入门Docker 基本命令docker run                         启动一个容器 docker search                      搜索容器 docker pull                        从dockerHub下载镜像 docker images                      列出docker所有的镜像">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-05T06:44:11.651Z">
+<meta property="og:updated_time" content="2018-02-08T09:54:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker入门">
 <meta name="twitter:description" content="Dcoker入门Docker 基本命令docker run                         启动一个容器 docker search                      搜索容器 docker pull                        从dockerHub下载镜像 docker images                      列出docker所有的镜像">
@@ -147,6 +147,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
+    <a href="https://github.com/fengshiweiit"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -349,7 +350,19 @@ docker pull java:1.8（默认下载最新的镜像，添加：1.8指定版本）
     &lt;/configuration&gt;
 &lt;/plugin&gt;
 mvn clean package docker：build
-</code></pre><h2 id="5-Docker-compose-编排微服务"><a href="#5-Docker-compose-编排微服务" class="headerlink" title="5.Docker compose 编排微服务"></a>5.Docker compose 编排微服务</h2>
+</code></pre><h2 id="5-Docker-compose-编排微服务"><a href="#5-Docker-compose-编排微服务" class="headerlink" title="5.Docker compose 编排微服务"></a>5.Docker compose 编排微服务</h2><pre><code>没看明白，以后有空慢慢看！
+</code></pre><h2 id="6-遇到的bug总结"><a href="#6-遇到的bug总结" class="headerlink" title="6.遇到的bug总结"></a>6.遇到的bug总结</h2><pre><code>1.maven构建docker时主机连接异常：docker的配置文件中没有暴露端口号
+添加：ExecStart=/usr/bin/docker daemon --tls=false -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375   ps：docker老版本的配置文件在default/docker下 , 新版本的配置文件在/lib/systemd/system/docker.service下（卡了2天！）
+2.maven构建的时候找不到jar的路径，配置pom文件中的resource
+&lt;resources&gt;
+    &lt;resource&gt;
+        &lt;targetPath&gt;/&lt;/targetPath&gt;
+        &lt;directory&gt;${project.build.directory}&lt;/directory&gt;
+        &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt;
+    &lt;/resource&gt;
+&lt;/resources&gt;
+</code></pre><p>以上只是docker入门的一些基础命令！年后会继续补充docker的compose微服务编排</p>
+
       
     </div>
     
@@ -509,7 +522,7 @@ mvn clean package docker：build
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dcoker入门"><span class="nav-number">1.</span> <span class="nav-text"> Dcoker入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-基本命令"><span class="nav-number">1.1.</span> <span class="nav-text">Docker 基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-搜索并下载一个镜像"><span class="nav-number">1.2.</span> <span class="nav-text">1.搜索并下载一个镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-启动一个镜像（容器）"><span class="nav-number">1.3.</span> <span class="nav-text">2.启动一个镜像（容器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用DockerFile构建Docker镜像"><span class="nav-number">1.4.</span> <span class="nav-text">3.使用DockerFile构建Docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-使用maven构建docker镜像"><span class="nav-number">1.5.</span> <span class="nav-text">4.使用maven构建docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Docker-compose-编排微服务"><span class="nav-number">1.6.</span> <span class="nav-text">5.Docker compose 编排微服务</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dcoker入门"><span class="nav-number">1.</span> <span class="nav-text"> Dcoker入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-基本命令"><span class="nav-number">1.1.</span> <span class="nav-text">Docker 基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-搜索并下载一个镜像"><span class="nav-number">1.2.</span> <span class="nav-text">1.搜索并下载一个镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-启动一个镜像（容器）"><span class="nav-number">1.3.</span> <span class="nav-text">2.启动一个镜像（容器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用DockerFile构建Docker镜像"><span class="nav-number">1.4.</span> <span class="nav-text">3.使用DockerFile构建Docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-使用maven构建docker镜像"><span class="nav-number">1.5.</span> <span class="nav-text">4.使用maven构建docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Docker-compose-编排微服务"><span class="nav-number">1.6.</span> <span class="nav-text">5.Docker compose 编排微服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-遇到的bug总结"><span class="nav-number">1.7.</span> <span class="nav-text">6.遇到的bug总结</span></a></li></ol></li></ol></div>
             
 
           </div>
