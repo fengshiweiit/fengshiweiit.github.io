@@ -358,7 +358,7 @@ docker pull java:1.8（默认下载最新的镜像，添加：1.8指定版本）
     &lt;/configuration&gt;
 &lt;/plugin&gt;
 mvn clean package docker：build
-</code></pre><h2 id="5-Docker-compose-编排微服务"><a href="#5-Docker-compose-编排微服务" class="headerlink" title="5.Docker compose 编排微服务"></a>5.Docker compose 编排微服务</h2><pre><code>1.centos7 下安装docker-compose
+</code></pre><h2 id="5-Docker-compose-编排微服务-暂时理解的作用为可以同时启动多个容器"><a href="#5-Docker-compose-编排微服务-暂时理解的作用为可以同时启动多个容器" class="headerlink" title="5.Docker compose 编排微服务(暂时理解的作用为可以同时启动多个容器)"></a>5.Docker compose 编排微服务(暂时理解的作用为可以同时启动多个容器)</h2><pre><code>1.centos7 下安装docker-compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose  
 2.设置权限
 chmod -x /usr/local/bin/docker-compose
@@ -374,8 +374,7 @@ chmod -x /usr/local/bin/docker-compose
     &lt;/resource&gt;
 &lt;/resources&gt;
 3.Dockerfile中暴露的端口号要和jar包中的一致！
-</code></pre><p>以上只是docker入门的一些基础命令！年后会继续补充docker的compose微服务编排</p>
-
+</code></pre>
           
         
       

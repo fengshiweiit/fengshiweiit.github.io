@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
 <meta property="og:description" content="Dcoker入门Docker 基本命令docker run                         启动一个容器 docker search                      搜索容器 docker pull                        从dockerHub下载镜像 docker images                      列出docker所有的镜像">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-10T03:54:39.659Z">
+<meta property="og:updated_time" content="2018-02-10T05:03:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker入门">
 <meta name="twitter:description" content="Dcoker入门Docker 基本命令docker run                         启动一个容器 docker search                      搜索容器 docker pull                        从dockerHub下载镜像 docker images                      列出docker所有的镜像">
@@ -354,7 +354,7 @@ docker pull java:1.8（默认下载最新的镜像，添加：1.8指定版本）
     &lt;/configuration&gt;
 &lt;/plugin&gt;
 mvn clean package docker：build
-</code></pre><h2 id="5-Docker-compose-编排微服务"><a href="#5-Docker-compose-编排微服务" class="headerlink" title="5.Docker compose 编排微服务"></a>5.Docker compose 编排微服务</h2><pre><code>1.centos7 下安装docker-compose
+</code></pre><h2 id="5-Docker-compose-编排微服务-暂时理解的作用为可以同时启动多个容器"><a href="#5-Docker-compose-编排微服务-暂时理解的作用为可以同时启动多个容器" class="headerlink" title="5.Docker compose 编排微服务(暂时理解的作用为可以同时启动多个容器)"></a>5.Docker compose 编排微服务(暂时理解的作用为可以同时启动多个容器)</h2><pre><code>1.centos7 下安装docker-compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose  
 2.设置权限
 chmod -x /usr/local/bin/docker-compose
@@ -370,8 +370,7 @@ chmod -x /usr/local/bin/docker-compose
     &lt;/resource&gt;
 &lt;/resources&gt;
 3.Dockerfile中暴露的端口号要和jar包中的一致！
-</code></pre><p>以上只是docker入门的一些基础命令！年后会继续补充docker的compose微服务编排</p>
-
+</code></pre>
       
     </div>
     
@@ -531,7 +530,7 @@ chmod -x /usr/local/bin/docker-compose
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dcoker入门"><span class="nav-number">1.</span> <span class="nav-text"> Dcoker入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-基本命令"><span class="nav-number">1.1.</span> <span class="nav-text">Docker 基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-搜索并下载一个镜像"><span class="nav-number">1.2.</span> <span class="nav-text">1.搜索并下载一个镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-启动一个镜像（容器）"><span class="nav-number">1.3.</span> <span class="nav-text">2.启动一个镜像（容器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用DockerFile构建Docker镜像"><span class="nav-number">1.4.</span> <span class="nav-text">3.使用DockerFile构建Docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-使用maven构建docker镜像"><span class="nav-number">1.5.</span> <span class="nav-text">4.使用maven构建docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Docker-compose-编排微服务"><span class="nav-number">1.6.</span> <span class="nav-text">5.Docker compose 编排微服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-遇到的bug总结"><span class="nav-number">1.7.</span> <span class="nav-text">6.遇到的bug总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dcoker入门"><span class="nav-number">1.</span> <span class="nav-text"> Dcoker入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-基本命令"><span class="nav-number">1.1.</span> <span class="nav-text">Docker 基本命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-搜索并下载一个镜像"><span class="nav-number">1.2.</span> <span class="nav-text">1.搜索并下载一个镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-启动一个镜像（容器）"><span class="nav-number">1.3.</span> <span class="nav-text">2.启动一个镜像（容器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用DockerFile构建Docker镜像"><span class="nav-number">1.4.</span> <span class="nav-text">3.使用DockerFile构建Docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-使用maven构建docker镜像"><span class="nav-number">1.5.</span> <span class="nav-text">4.使用maven构建docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Docker-compose-编排微服务-暂时理解的作用为可以同时启动多个容器"><span class="nav-number">1.6.</span> <span class="nav-text">5.Docker compose 编排微服务(暂时理解的作用为可以同时启动多个容器)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-遇到的bug总结"><span class="nav-number">1.7.</span> <span class="nav-text">6.遇到的bug总结</span></a></li></ol></li></ol></div>
             
 
           </div>
