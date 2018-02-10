@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
 <meta property="og:description" content="Dcoker入门Docker 基本命令docker run                         启动一个容器 docker search                      搜索容器 docker pull                        从dockerHub下载镜像 docker images                      列出docker所有的镜像">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-10T01:38:39.063Z">
+<meta property="og:updated_time" content="2018-02-10T03:54:39.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker入门">
 <meta name="twitter:description" content="Dcoker入门Docker 基本命令docker run                         启动一个容器 docker search                      搜索容器 docker pull                        从dockerHub下载镜像 docker images                      列出docker所有的镜像">
@@ -350,8 +350,12 @@ docker pull java:1.8（默认下载最新的镜像，添加：1.8指定版本）
     &lt;/configuration&gt;
 &lt;/plugin&gt;
 mvn clean package docker：build
-</code></pre><h2 id="5-Docker-compose-编排微服务"><a href="#5-Docker-compose-编排微服务" class="headerlink" title="5.Docker compose 编排微服务"></a>5.Docker compose 编排微服务</h2><pre><code>没看明白，以后有空慢慢看！
-</code></pre><h2 id="6-遇到的bug总结"><a href="#6-遇到的bug总结" class="headerlink" title="6.遇到的bug总结"></a>6.遇到的bug总结</h2><pre><code>1.maven构建docker时主机连接异常：docker的配置文件中没有暴露端口号
+</code></pre><h2 id="5-Docker-compose-编排微服务"><a href="#5-Docker-compose-编排微服务" class="headerlink" title="5.Docker compose 编排微服务"></a>5.Docker compose 编排微服务</h2><pre><code>1.centos7 下安装docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose  
+2.设置权限
+chmod -x /usr/local/bin/docker-compose
+</code></pre><hr>
+<h2 id="6-遇到的bug总结"><a href="#6-遇到的bug总结" class="headerlink" title="6.遇到的bug总结"></a>6.遇到的bug总结</h2><pre><code>1.maven构建docker时主机连接异常：docker的配置文件中没有暴露端口号
 添加：ExecStart=/usr/bin/docker daemon --tls=false -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375   ps：docker老版本的配置文件在default/docker下 , 新版本的配置文件在/lib/systemd/system/docker.service下（卡了2天！）
 2.maven构建的时候找不到jar的路径，配置pom文件中的resource
 &lt;resources&gt;
@@ -608,6 +612,8 @@ mvn clean package docker：build
   
 
 
+  
+
 
 
 
@@ -646,6 +652,11 @@ mvn clean package docker：build
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
