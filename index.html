@@ -508,9 +508,9 @@ Amqp:有4中交换机分别代表着不同的通信模式
     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
     &lt;artifactId&gt;spring-boot-starter-amqp&lt;/artifactId&gt;
 &lt;/dependency&gt;
-</code></pre><h5 id="2-代码实现（这里还没有具体弄懂exchange绑定queue，感觉怎么样都可以调成功）"><a href="#2-代码实现（这里还没有具体弄懂exchange绑定queue，感觉怎么样都可以调成功）" class="headerlink" title="2.代码实现（这里还没有具体弄懂exchange绑定queue，感觉怎么样都可以调成功）"></a>2.代码实现（这里还没有具体弄懂exchange绑定queue，感觉怎么样都可以调成功）</h5><p>生产者：<br>  rabbitTemplate.convertAndSend(“exchange1”,”key12”, 1234);<br>消费者：<br>    @RabbitListener(bindings = @QueueBinding(<br>            value = @Queue(value = “rabbit2” , durable = “true”) ,<br>            exchange = @Exchange(value = “exchange1” , type = “direct” , durable = “true”) ,key = “key12”))<br>    public void aaa(String message){<br>        System.out.println(message);<br>    }</p>
-<h2 id="RabbitMQ遇到的bug总结"><a href="#RabbitMQ遇到的bug总结" class="headerlink" title="RabbitMQ遇到的bug总结"></a>RabbitMQ遇到的bug总结</h2><p>1.启动失败，由于已经起了一个名为exchange的交换机，类型为topic，再次启动一个名为exchange的交换机，类型为direct。则启动报错ShutdownSignalException: channel error<br>解决方式：暂时是去rabbit客户端关闭了类型为topic名为exchange的交换机（127.0.0.1：15672）</p>
-
+</code></pre><h5 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2.代码实现"></a>2.代码实现</h5><p>生产者：<br>  rabbitTemplate.convertAndSend(“exchange1”,”key12”, 1234);<br>消费者：<br>    @RabbitListener(bindings = @QueueBinding(<br>            value = @Queue(value = “rabbit2” , durable = “true”) ,<br>            exchange = @Exchange(value = “exchange1” , type = “direct” , durable = “true”) ,key = “key12”))<br>    public void aaa(String message){<br>        System.out.println(message);<br>    }</p>
+<h2 id="RabbitMQ遇到的bug总结"><a href="#RabbitMQ遇到的bug总结" class="headerlink" title="RabbitMQ遇到的bug总结"></a>RabbitMQ遇到的bug总结</h2><p>1.启动失败，由于已经起了一个名为exchange的交换机，类型为topic，再次启动一个名为exchange的交换机，类型为direct。则启动报错ShutdownSignalException: channel error</p>
+<h2 id="解决方式：暂时是去rabbit客户端关闭了类型为topic名为exchange的交换机（127-0-0-1：15672）"><a href="#解决方式：暂时是去rabbit客户端关闭了类型为topic名为exchange的交换机（127-0-0-1：15672）" class="headerlink" title="解决方式：暂时是去rabbit客户端关闭了类型为topic名为exchange的交换机（127.0.0.1：15672）"></a>解决方式：暂时是去rabbit客户端关闭了类型为topic名为exchange的交换机（127.0.0.1：15672）</h2><h2 id="注：queue本质上是和exchange没有任何关系的（一旦创建了队列，是不会消失的！！遇到好多坑。。）"><a href="#注：queue本质上是和exchange没有任何关系的（一旦创建了队列，是不会消失的！！遇到好多坑。。）" class="headerlink" title="注：queue本质上是和exchange没有任何关系的（一旦创建了队列，是不会消失的！！遇到好多坑。。）"></a>注：queue本质上是和exchange没有任何关系的（一旦创建了队列，是不会消失的！！遇到好多坑。。）</h2>
           
         
       
