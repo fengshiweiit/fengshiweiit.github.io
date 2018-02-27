@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
 <meta property="og:description" content="Dcoker入门Docker 基本命令docker run                         启动一个容器 docker search                      搜索容器 docker pull                        从dockerHub下载镜像 docker images                      列出docker所有的镜像">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-10T05:03:02.000Z">
+<meta property="og:updated_time" content="2018-02-27T08:33:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker入门">
 <meta name="twitter:description" content="Dcoker入门Docker 基本命令docker run                         启动一个容器 docker search                      搜索容器 docker pull                        从dockerHub下载镜像 docker images                      列出docker所有的镜像">
@@ -319,7 +319,7 @@ docker rmi                         删除镜像
 docker rm                          删除容器
 docker rm $(docker ps -a -q)       删除所有容器
 docker push                        将容器发到dockerHub
-docker exec                        进入一个容器
+sudo docker exec -it containerId /bin/bash    进入容器
 dokcer logs                        查看容器的日志信息
 待补充。。。。。。。
 </code></pre><hr>
@@ -404,6 +404,10 @@ chmod -x /usr/local/bin/docker-compose
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/02/26/ElasticSearch入门/" rel="prev" title="ElasticSearch入门">
+                ElasticSearch入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -479,7 +483,7 @@ chmod -x /usr/local/bin/docker-compose
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

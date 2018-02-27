@@ -237,6 +237,127 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/02/26/ElasticSearch入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AlbertWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AlbertWei's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/26/ElasticSearch入门/" itemprop="url">ElasticSearch入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T17:04:17+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="ElasticSearch入门"><a href="#ElasticSearch入门" class="headerlink" title="ElasticSearch入门"></a><center>ElasticSearch入门</center></h1><hr>
+<h2 id="一、ElasticSearch结构和传统数据库对比"><a href="#一、ElasticSearch结构和传统数据库对比" class="headerlink" title="一、ElasticSearch结构和传统数据库对比"></a>一、ElasticSearch结构和传统数据库对比</h2><p>Database ———-&gt; index      索引<br>Table    ———-&gt; Type       类型<br>Row      ———-&gt; Document   文档<br>Column   ———-&gt; Field      字段<br>Schema   ———-&gt; Mapping    映射<br>SQL      ———-&gt; Query DSL  查询语法<br>Select * ———-&gt; GET http:  查询<br>Update   ———-&gt; PUT http:  更新，插入<br>Delete   ———-&gt; Delete     删除<br>61.96  50.7</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/01/30/Docker入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -323,7 +444,7 @@ docker rmi                         删除镜像
 docker rm                          删除容器
 docker rm $(docker ps -a -q)       删除所有容器
 docker push                        将容器发到dockerHub
-docker exec                        进入一个容器
+sudo docker exec -it containerId /bin/bash    进入容器
 dokcer logs                        查看容器的日志信息
 待补充。。。。。。。
 </code></pre><hr>
@@ -1150,7 +1271,7 @@ public RestTemplate restTemplate(
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
