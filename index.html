@@ -308,11 +308,9 @@
       
         
           
-            <h1 id="Pattern实现正则用法"><a href="#Pattern实现正则用法" class="headerlink" title="Pattern实现正则用法"></a><center>Pattern实现正则用法</center></h1><h2 id="Pattern类和Matcher类"><a href="#Pattern类和Matcher类" class="headerlink" title="Pattern类和Matcher类"></a>Pattern类和Matcher类</h2><!--定义正则匹配的规则 例：匹配三个数字-->
-<p>Pattern pattern = Pattern.compile(“[\d]{3}”);<br><!--定义要匹配的字符串--><br>Matcher matcher = pattern.matcher(“9879a13a456”);</p>
+            <h1 id="Pattern实现正则用法"><a href="#Pattern实现正则用法" class="headerlink" title="Pattern实现正则用法"></a><center>Pattern实现正则用法</center></h1><h2 id="Pattern类和Matcher类"><a href="#Pattern类和Matcher类" class="headerlink" title="Pattern类和Matcher类"></a>Pattern类和Matcher类</h2><p>//定义正则匹配的规则 例：匹配三个数字<br>Pattern pattern = Pattern.compile(“[\d]{3}”);<br>//定义要匹配的字符串<br>Matcher matcher = pattern.matcher(“9879a13a456”);</p>
 <hr>
-<h2 id="Matcher类api的使用"><a href="#Matcher类api的使用" class="headerlink" title="Matcher类api的使用"></a>Matcher类api的使用</h2><!--完全匹配返回true-->
-<p>boolean matches = matcher.matches();<br><!--局部匹配返回true，并将匹配的字符串缩小到第一次匹配之后--><br>boolean find = matcher.find();<br><!--查询到再次匹配时的起始索引，这里就已经排除了已经find的--><br><!--使用了find方法之后，start方法相当于indexOf的作用 获取匹配到的索引，若没有匹配到会抛出异常--><br>int start = matcher.start();<br><!--重置匹配的索引，变为0--><br>matcher.reset();<br><!--得到匹配的值--><br>String group = matcher.group();<br><!--从第一个字符开始局部匹配--><br>boolean lookingAt = matcher.lookingAt();</p>
+<h2 id="Matcher类api的使用"><a href="#Matcher类api的使用" class="headerlink" title="Matcher类api的使用"></a>Matcher类api的使用</h2><p>//完全匹配返回true<br>boolean matches = matcher.matches();<br>//局部匹配返回true，并将匹配的字符串缩小到第一次匹配之后<br>boolean find = matcher.find();<br>//查询到再次匹配时的起始索引，这里就已经排除了已经find的<br>//使用了find方法之后，start方法相当于indexOf的作用 获取匹配到的索引，若没有匹配到会抛出异常<br>int start = matcher.start();<br>//重置匹配的索引，变为0<br>matcher.reset();<br>//得到匹配的值<br>String group = matcher.group();<br>//从第一个字符开始局部匹配<br>boolean lookingAt = matcher.lookingAt();</p>
 <h2 id="一些简单的正则匹配规则"><a href="#一些简单的正则匹配规则" class="headerlink" title="一些简单的正则匹配规则"></a>一些简单的正则匹配规则</h2><p><a href="https://github.com/fengshiweiit/RegexDemo" target="_blank" rel="noopener">https://github.com/fengshiweiit/RegexDemo</a></p>
 
           
