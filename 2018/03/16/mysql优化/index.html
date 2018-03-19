@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Pattern实现正则用法Pattern类和Matcher类//定义正则匹配的规则 例：匹配三个数字Pattern pattern = Pattern.compile(“[\d]{3}”);//定义要匹配的字符串Matcher matcher = pattern.matcher(“9879a13a456”);  Matcher类api的使用//完全匹配返回trueboolean matches =">
+<meta name="description" content="Mysql优化 Mysql的数据库引擎：    5.5版本之前默认的存储引擎为MyISAM（性能快，但不支持事务处理，支持表级锁，不支持外键）    5.5版本之后使用InnoDB存储引擎（支持事务处理和行锁） 注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB数据库事务的4种隔离级别：    数据库事务的隔离级别有4种，由低到高分别为Read unco">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pattern实现正则用法">
-<meta property="og:url" content="http://albertwei.site/2018/03/15/Pattern实现正则用法/index.html">
+<meta property="og:title" content="mysql优化">
+<meta property="og:url" content="http://albertwei.site/2018/03/16/mysql优化/index.html">
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
-<meta property="og:description" content="Pattern实现正则用法Pattern类和Matcher类//定义正则匹配的规则 例：匹配三个数字Pattern pattern = Pattern.compile(“[\d]{3}”);//定义要匹配的字符串Matcher matcher = pattern.matcher(“9879a13a456”);  Matcher类api的使用//完全匹配返回trueboolean matches =">
+<meta property="og:description" content="Mysql优化 Mysql的数据库引擎：    5.5版本之前默认的存储引擎为MyISAM（性能快，但不支持事务处理，支持表级锁，不支持外键）    5.5版本之后使用InnoDB存储引擎（支持事务处理和行锁） 注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB数据库事务的4种隔离级别：    数据库事务的隔离级别有4种，由低到高分别为Read unco">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-15T02:35:12.458Z">
+<meta property="og:updated_time" content="2018-03-16T06:31:13.796Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pattern实现正则用法">
-<meta name="twitter:description" content="Pattern实现正则用法Pattern类和Matcher类//定义正则匹配的规则 例：匹配三个数字Pattern pattern = Pattern.compile(“[\d]{3}”);//定义要匹配的字符串Matcher matcher = pattern.matcher(“9879a13a456”);  Matcher类api的使用//完全匹配返回trueboolean matches =">
+<meta name="twitter:title" content="mysql优化">
+<meta name="twitter:description" content="Mysql优化 Mysql的数据库引擎：    5.5版本之前默认的存储引擎为MyISAM（性能快，但不支持事务处理，支持表级锁，不支持外键）    5.5版本之后使用InnoDB存储引擎（支持事务处理和行锁） 注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB数据库事务的4种隔离级别：    数据库事务的隔离级别有4种，由低到高分别为Read unco">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://albertwei.site/2018/03/15/Pattern实现正则用法/"/>
+  <link rel="canonical" href="http://albertwei.site/2018/03/16/mysql优化/"/>
 
 
 
 
 
-  <title>Pattern实现正则用法 | AlbertWei's Blogs</title>
+  <title>mysql优化 | AlbertWei's Blogs</title>
   
 
 
@@ -237,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/03/15/Pattern实现正则用法/">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/03/16/mysql优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AlbertWei">
@@ -254,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Pattern实现正则用法</h1>
+          <h1 class="post-title" itemprop="name headline">mysql优化</h1>
         
 
         <div class="post-meta">
@@ -266,8 +266,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T10:09:38+08:00">
-                2018-03-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T11:26:27+08:00">
+                2018-03-16
               </time>
             
 
@@ -304,10 +304,9 @@
       
 
       
-        <h1 id="Pattern实现正则用法"><a href="#Pattern实现正则用法" class="headerlink" title="Pattern实现正则用法"></a><center>Pattern实现正则用法</center></h1><h2 id="Pattern类和Matcher类"><a href="#Pattern类和Matcher类" class="headerlink" title="Pattern类和Matcher类"></a>Pattern类和Matcher类</h2><p>//定义正则匹配的规则 例：匹配三个数字<br>Pattern pattern = Pattern.compile(“[\d]{3}”);<br>//定义要匹配的字符串<br>Matcher matcher = pattern.matcher(“9879a13a456”);</p>
-<hr>
-<h2 id="Matcher类api的使用"><a href="#Matcher类api的使用" class="headerlink" title="Matcher类api的使用"></a>Matcher类api的使用</h2><p>//完全匹配返回true<br>boolean matches = matcher.matches();<br>//局部匹配返回true，并将匹配的字符串缩小到第一次匹配之后<br>boolean find = matcher.find();<br>//查询到再次匹配时的起始索引，这里就已经排除了已经find的<br>//使用了find方法之后，start方法相当于indexOf的作用 获取匹配到的索引，若没有匹配到会抛出异常<br>int start = matcher.start();<br>//重置匹配的索引，变为0<br>matcher.reset();<br>//得到匹配的值<br>String group = matcher.group();<br>//从第一个字符开始局部匹配<br>boolean lookingAt = matcher.lookingAt();</p>
-<h2 id="一些简单的正则匹配规则"><a href="#一些简单的正则匹配规则" class="headerlink" title="一些简单的正则匹配规则"></a>一些简单的正则匹配规则</h2><p><a href="https://github.com/fengshiweiit/RegexDemo" target="_blank" rel="noopener">https://github.com/fengshiweiit/RegexDemo</a></p>
+        <h1 id="Mysql优化"><a href="#Mysql优化" class="headerlink" title="Mysql优化"></a><center>Mysql优化</center></h1><hr>
+<p>Mysql的数据库引擎：<br>    5.5版本之前默认的存储引擎为MyISAM（性能快，但不支持事务处理，支持表级锁，不支持外键）<br>    5.5版本之后使用InnoDB存储引擎（支持事务处理和行锁）</p>
+<h2 id="注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB"><a href="#注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB" class="headerlink" title="注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB"></a>注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB</h2><p>数据库事务的4种隔离级别：<br>    数据库事务的隔离级别有4种，由低到高分别为Read uncommitted 、Read committed 、Repeatable read 、Serializable 。而且，在事务的并发操作中可能会出现脏读，不可重复读，幻读。<br>    数据库默认的隔离级别为 Read commited</p>
 
       
     </div>
@@ -332,8 +331,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/26/ElasticSearch入门/" rel="next" title="ElasticSearch入门">
-                <i class="fa fa-chevron-left"></i> ElasticSearch入门
+              <a href="/2018/03/15/Pattern实现正则用法/" rel="next" title="Pattern实现正则用法">
+                <i class="fa fa-chevron-left"></i> Pattern实现正则用法
               </a>
             
           </div>
@@ -341,10 +340,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/16/mysql优化/" rel="prev" title="mysql优化">
-                mysql优化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -476,7 +471,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pattern实现正则用法"><span class="nav-number">1.</span> <span class="nav-text">Pattern实现正则用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pattern类和Matcher类"><span class="nav-number">1.1.</span> <span class="nav-text">Pattern类和Matcher类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matcher类api的使用"><span class="nav-number">1.2.</span> <span class="nav-text">Matcher类api的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些简单的正则匹配规则"><span class="nav-number">1.3.</span> <span class="nav-text">一些简单的正则匹配规则</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql优化"><span class="nav-number">1.</span> <span class="nav-text">Mysql优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB"><span class="nav-number">1.1.</span> <span class="nav-text">注：有雨MyISAM性能快，如果大量的使用查询语句可以使用其作为存储引擎，否则使用InnoDB</span></a></li></ol></li></ol></div>
             
 
           </div>
