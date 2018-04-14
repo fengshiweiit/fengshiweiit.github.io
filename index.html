@@ -1486,6 +1486,137 @@ public RestTemplate restTemplate(
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2017/12/24/线程池原理初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AlbertWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hashiqi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AlbertWei's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/24/线程池原理初探/" itemprop="url">线程池原理初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-24T21:32:23+08:00">
+                2017-12-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="线程池原理初探"><a href="#线程池原理初探" class="headerlink" title="线程池原理初探"></a><center>线程池原理初探</center></h1><h2 id="线程池的优势"><a href="#线程池的优势" class="headerlink" title="线程池的优势"></a>线程池的优势</h2><pre><code>再高并发的情况下如果不使用线程池的话会不断的创建线程，销毁线程，这样对内存的消耗会很大。使用线程池的话，再一个任务使用完线程之后不会立即销毁线程。
+</code></pre><hr>
+<h1 id="线程池原理"><a href="#线程池原理" class="headerlink" title="线程池原理"></a>线程池原理</h1><pre><code>一.首先了解一下线程池初始化时的几个重要参数：
+    1.corePoolSize：核心线程数
+    2.maximumPoolSize：最大线程数
+    3.keepAliveTime: 表示线程多长时间没有执行任务的话会销毁
+    4.unit：keepAliveTime的单位
+    5.workQueue：等待队列（缓存队列），用来储存等待的队列
+    6.threadFactory: 线程工厂，用来创建线程
+    7.handler：表示拒绝处理任务时的策略，默认时抛异常（所以再创建线程池的时候一般都要try catch）
+二.线程池工作原理
+    线程池初始化的时候会初始以上参数，当有任务进来的时候就会给其创建线程，当线程数大于核心线程数但小于最大线程数的时候，会将线程存入缓存队列，当缓存队列中的线程堆积满的时候，会继续创建新的线程直到线程数达到最大线程数。当线程数达到最大线程数时，再有任务进来则不会创建新的线程，而是调用handler中的拒绝处理任务的策略（默认策略为抛出异常）。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1536,7 +1667,7 @@ public RestTemplate restTemplate(
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
