@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
 <meta property="og:description" content="线程池原理初探线程池的优势再高并发的情况下如果不使用线程池的话会不断的创建线程，销毁线程，这样对内存的消耗会很大。使用线程池的话，再一个任务使用完线程之后不会立即销毁线程。  线程池原理一.首先了解一下线程池初始化时的几个重要参数：     1.corePoolSize：核心线程数     2.maximumPoolSize：最大线程数     3.keepAliveTime: 表示线程多长时间没">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T14:03:21.364Z">
+<meta property="og:updated_time" content="2018-04-14T14:34:35.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池原理初探">
 <meta name="twitter:description" content="线程池原理初探线程池的优势再高并发的情况下如果不使用线程池的话会不断的创建线程，销毁线程，这样对内存的消耗会很大。使用线程池的话，再一个任务使用完线程之后不会立即销毁线程。  线程池原理一.首先了解一下线程池初始化时的几个重要参数：     1.corePoolSize：核心线程数     2.maximumPoolSize：最大线程数     3.keepAliveTime: 表示线程多长时间没">
@@ -316,6 +316,7 @@
     7.handler：表示拒绝处理任务时的策略，默认时抛异常（所以再创建线程池的时候一般都要try catch）
 二.线程池工作原理
     线程池初始化的时候会初始以上参数，当有任务进来的时候就会给其创建线程，当线程数大于核心线程数但小于最大线程数的时候，会将线程存入缓存队列，当缓存队列中的线程堆积满的时候，会继续创建新的线程直到线程数达到最大线程数。当线程数达到最大线程数时，再有任务进来则不会创建新的线程，而是调用handler中的拒绝处理任务的策略（默认策略为抛出异常）。
+PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,如果队并发量不确定的情况下可以使用Executors.newCachedThreadPool
 </code></pre>
       
     </div>
