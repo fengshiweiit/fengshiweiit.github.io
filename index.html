@@ -237,6 +237,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/04/15/redis做分布式锁的实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AlbertWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hashiqi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AlbertWei's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/15/redis做分布式锁的实现/" itemprop="url">redis做分布式锁的实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T16:16:35+08:00">
+                2018-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis实现分布式锁"><a href="#Redis实现分布式锁" class="headerlink" title="Redis实现分布式锁"></a><center>Redis实现分布式锁</center></h1><h2 id="一-主要用到的函数"><a href="#一-主要用到的函数" class="headerlink" title="一.主要用到的函数"></a>一.主要用到的函数</h2><pre><code>1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。
+2.getSet：获得设置之前的值并给其设置新的值。
+</code></pre><hr>
+<h2 id="二-redis锁实现原理"><a href="#二-redis锁实现原理" class="headerlink" title="二.redis锁实现原理"></a>二.redis锁实现原理</h2><pre><code>1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间
+jedis.setNX(&quot;redisKey&quot;, System.currentTimeMillis() + expireTime)
+
+2.在第二个线程进来的时候调用setNX方法时如果返回1则说明上一个线程已经执行完成了，redis锁已经被释放了，如果返回0则说明锁没有被释放，则可以等待或者重试
+
+3.具体代码实现(这里面有个防止线程饥饿的判断，没弄懂啥意思)
+//加锁的代码实现
+public synchronized boolean lock() {
+    int timeout = this.timeout;
+    long expires = System.currentTimeMillis() + expire + 1;
+    String expiresStr = String.valueOf(expires) + &quot;;&quot; + hostName; 
+    //如果设置成功了则返回1
+    if(jedis.setNX(lockKey, expiresStr) == 1){
+        return true;
+    }else {
+        //这就说明已经被设置了值，判断是否过期了
+        String time = jedis.getSet(lockKey, System.currentTimeMillis() + expire + 1);
+        //将这个值和当前时间进行比较
+        if (time &lt; System.currentTimeMillis){
+            //说明时间过期了
+            return true;
+        }else {
+            //没有过期 设置失败
+            return false;
+        }
+    }
+}
+//释放锁的代码实现
+public sychronized boolean unlock() {
+    jedis.delete(lockKey);
+}
+
+详细实现代码：https://www.cnblogs.com/SimplifyIT/p/6691584.html
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/03/16/mysql优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1620,137 +1775,13 @@ PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="AlbertWei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/hashiqi.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AlbertWei's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/" itemprop="url">浅谈HashMap，HashTable和concurrentHashMap的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T08:49:02+08:00">
-                2017-11-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a><center>HashMap</center></h1><h2 id="一-定义"><a href="#一-定义" class="headerlink" title="一.定义"></a>一.定义</h2><pre><code>HashMap的数据结构为数组加链式的。
-存值的时候根据key值计算出其hashCode的值然后对应数组的索引（索引上存的是一个entry），如果多个不同的key得到的hashCode值相同的话，则存储在数组对应的链上，新插入的（entry）在链的前面。
-取值的时候根据key计算出对应的hashCode，找到数组上的索引，然后遍历此索引上的entry链，取出对应的key的value值。
-</code></pre><hr>
-<h2 id="二-ConcurrentHashMap和HashTable的区别"><a href="#二-ConcurrentHashMap和HashTable的区别" class="headerlink" title="二.ConcurrentHashMap和HashTable的区别"></a>二.ConcurrentHashMap和HashTable的区别</h2><pre><code>相同点：HashTable和ConcurrentHashMap都是线程安全的，可以适用于高并发的环境。
-不同点：HashTable没有使用分段锁的机制，在迭代的时候会将整个map集合都锁定，ConcurrentHashMap使用了分段锁的机制，在迭代时只会锁定map的部分。HashTable防止并发的处理就是在每一个方法上都加了同步锁机制。
-</code></pre><hr>
-<h2 id="三-HashMap并发导致的原因"><a href="#三-HashMap并发导致的原因" class="headerlink" title="三.HashMap并发导致的原因"></a>三.HashMap并发导致的原因</h2><pre><code>在hashmap的长度达到零界并准备扩容的时候会调用一个transfer的方法，这个方法中迭代时由于next的值被另外一个线程给改变了，会导致死循环（具体也没咋看明白）
-详细请见：https://blog.csdn.net/dgutliangxuan/article/details/78779448
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1798,7 +1829,7 @@ PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="Record the challenage met in work">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AlbertWei&#39;s Blogs">
-<meta property="og:url" content="http://albertwei.site/archives/2017/index.html">
+<meta name="description" content="Redis实现分布式锁一.主要用到的函数1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。 2.getSet：获得设置之前的值并给其设置新的值。  二.redis锁实现原理1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间 jedis.setNX(&amp;quot;redisKey&amp;quot;, Sy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis做分布式锁的实现">
+<meta property="og:url" content="http://albertwei.site/2018/04/15/redis做分布式锁的实现/index.html">
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
-<meta property="og:description" content="Record the challenage met in work">
+<meta property="og:description" content="Redis实现分布式锁一.主要用到的函数1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。 2.getSet：获得设置之前的值并给其设置新的值。  二.redis锁实现原理1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间 jedis.setNX(&amp;quot;redisKey&amp;quot;, Sy">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-15T13:56:34.359Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AlbertWei&#39;s Blogs">
-<meta name="twitter:description" content="Record the challenage met in work">
+<meta name="twitter:title" content="redis做分布式锁的实现">
+<meta name="twitter:description" content="Redis实现分布式锁一.主要用到的函数1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。 2.getSet：获得设置之前的值并给其设置新的值。  二.redis锁实现原理1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间 jedis.setNX(&amp;quot;redisKey&amp;quot;, Sy">
 
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://albertwei.site/archives/2017/"/>
+  <link rel="canonical" href="http://albertwei.site/2018/04/15/redis做分布式锁的实现/"/>
 
 
 
 
 
-  <title>归档 | AlbertWei's Blogs</title>
+  <title>redis做分布式锁的实现 | AlbertWei's Blogs</title>
   
 
 
@@ -147,7 +148,7 @@
     <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/fengshiweiit"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
@@ -222,111 +223,176 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 11 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/04/15/redis做分布式锁的实现/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AlbertWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hashiqi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AlbertWei's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/12/24/线程池原理初探/" itemprop="url">
-              
-                <span itemprop="name">线程池原理初探</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">redis做分布式锁的实现</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-24T21:32:23+08:00"
-              content="2017-12-24" >
-          12-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T16:16:35+08:00">
+                2018-04-15
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/" itemprop="url">
-              
-                <span itemprop="name">浅谈HashMap，HashTable和concurrentHashMap的区别</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-03T08:49:02+08:00"
-              content="2017-11-03" >
-          11-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <h1 id="Redis实现分布式锁"><a href="#Redis实现分布式锁" class="headerlink" title="Redis实现分布式锁"></a><center>Redis实现分布式锁</center></h1><h2 id="一-主要用到的函数"><a href="#一-主要用到的函数" class="headerlink" title="一.主要用到的函数"></a>一.主要用到的函数</h2><pre><code>1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。
+2.getSet：获得设置之前的值并给其设置新的值。
+</code></pre><hr>
+<h2 id="二-redis锁实现原理"><a href="#二-redis锁实现原理" class="headerlink" title="二.redis锁实现原理"></a>二.redis锁实现原理</h2><pre><code>1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间
+jedis.setNX(&quot;redisKey&quot;, System.currentTimeMillis() + expireTime)
+
+2.在第二个线程进来的时候调用setNX方法时如果返回1则说明上一个线程已经执行完成了，redis锁已经被释放了，如果返回0则说明锁没有被释放，则可以等待或者重试
+
+3.具体代码实现(这里面有个防止线程饥饿的判断，没弄懂啥意思)
+//加锁的代码实现
+public synchronized boolean lock() {
+    int timeout = this.timeout;
+    long expires = System.currentTimeMillis() + expire + 1;
+    String expiresStr = String.valueOf(expires) + &quot;;&quot; + hostName; 
+    //如果设置成功了则返回1
+    if(jedis.setNX(lockKey, expiresStr) == 1){
+        return true;
+    }else {
+        //这就说明已经被设置了值，判断是否过期了
+        String time = jedis.getSet(lockKey, System.currentTimeMillis() + expire + 1);
+        //将这个值和当前时间进行比较
+        if (time &lt; System.currentTimeMillis){
+            //说明时间过期了
+            return true;
+        }else {
+            //没有过期 设置失败
+            return false;
+        }
+    }
+}
+//释放锁的代码实现
+public sychronized boolean unlock() {
+    jedis.delete(lockKey);
+}
+
+详细实现代码：https://www.cnblogs.com/SimplifyIT/p/6691584.html
+</code></pre>
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/16/mysql优化/" rel="next" title="mysql优化">
+                <i class="fa fa-chevron-left"></i> mysql优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -334,6 +400,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -354,8 +424,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -415,6 +494,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis实现分布式锁"><span class="nav-number">1.</span> <span class="nav-text">Redis实现分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-主要用到的函数"><span class="nav-number">1.1.</span> <span class="nav-text">一.主要用到的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-redis锁实现原理"><span class="nav-number">1.2.</span> <span class="nav-text">二.redis锁实现原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -555,6 +650,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
