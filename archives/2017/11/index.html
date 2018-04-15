@@ -79,17 +79,16 @@
 
 
 
-<meta name="description" content="线程池原理初探线程池的优势再高并发的情况下如果不使用线程池的话会不断的创建线程，销毁线程，这样对内存的消耗会很大。使用线程池的话，再一个任务使用完线程之后不会立即销毁线程。  线程池原理一.首先了解一下线程池初始化时的几个重要参数：     1.corePoolSize：核心线程数     2.maximumPoolSize：最大线程数     3.keepAliveTime: 表示线程多长时间没">
-<meta property="og:type" content="article">
-<meta property="og:title" content="线程池原理初探">
-<meta property="og:url" content="http://albertwei.site/2017/12/24/线程池原理初探/index.html">
+<meta name="description" content="Record the challenage met in work">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AlbertWei&#39;s Blogs">
+<meta property="og:url" content="http://albertwei.site/archives/2017/11/index.html">
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
-<meta property="og:description" content="线程池原理初探线程池的优势再高并发的情况下如果不使用线程池的话会不断的创建线程，销毁线程，这样对内存的消耗会很大。使用线程池的话，再一个任务使用完线程之后不会立即销毁线程。  线程池原理一.首先了解一下线程池初始化时的几个重要参数：     1.corePoolSize：核心线程数     2.maximumPoolSize：最大线程数     3.keepAliveTime: 表示线程多长时间没">
+<meta property="og:description" content="Record the challenage met in work">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T14:34:35.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线程池原理初探">
-<meta name="twitter:description" content="线程池原理初探线程池的优势再高并发的情况下如果不使用线程池的话会不断的创建线程，销毁线程，这样对内存的消耗会很大。使用线程池的话，再一个任务使用完线程之后不会立即销毁线程。  线程池原理一.首先了解一下线程池初始化时的几个重要参数：     1.corePoolSize：核心线程数     2.maximumPoolSize：最大线程数     3.keepAliveTime: 表示线程多长时间没">
+<meta name="twitter:title" content="AlbertWei&#39;s Blogs">
+<meta name="twitter:description" content="Record the challenage met in work">
 
 
 
@@ -119,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://albertwei.site/2017/12/24/线程池原理初探/"/>
+  <link rel="canonical" href="http://albertwei.site/archives/2017/11/"/>
 
 
 
 
 
-  <title>线程池原理初探 | AlbertWei's Blogs</title>
+  <title>归档 | AlbertWei's Blogs</title>
   
 
 
@@ -148,7 +147,7 @@
     <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <a href="https://github.com/fengshiweiit"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
@@ -223,157 +222,74 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 10 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2017">2017</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2017/12/24/线程池原理初探/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="AlbertWei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/hashiqi.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AlbertWei's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">线程池原理初探</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/" itemprop="url">
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="name">浅谈HashMap，HashTable和concurrentHashMap的区别</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-24T21:32:23+08:00">
-                2017-12-24
-              </time>
-            
+            </a>
+        
+      </h2>
 
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-11-03T08:49:02+08:00"
+              content="2017-11-03" >
+          11-03
+        </time>
+      </div>
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h1 id="线程池原理初探"><a href="#线程池原理初探" class="headerlink" title="线程池原理初探"></a><center>线程池原理初探</center></h1><h2 id="线程池的优势"><a href="#线程池的优势" class="headerlink" title="线程池的优势"></a>线程池的优势</h2><pre><code>再高并发的情况下如果不使用线程池的话会不断的创建线程，销毁线程，这样对内存的消耗会很大。使用线程池的话，再一个任务使用完线程之后不会立即销毁线程。
-</code></pre><hr>
-<h1 id="线程池原理"><a href="#线程池原理" class="headerlink" title="线程池原理"></a>线程池原理</h1><pre><code>一.首先了解一下线程池初始化时的几个重要参数：
-    1.corePoolSize：核心线程数
-    2.maximumPoolSize：最大线程数
-    3.keepAliveTime: 表示线程多长时间没有执行任务的话会销毁
-    4.unit：keepAliveTime的单位
-    5.workQueue：等待队列（缓存队列），用来储存等待的队列
-    6.threadFactory: 线程工厂，用来创建线程
-    7.handler：表示拒绝处理任务时的策略，默认时抛异常（所以再创建线程池的时候一般都要try catch）
-二.线程池工作原理
-    线程池初始化的时候会初始以上参数，当有任务进来的时候就会给其创建线程，当线程数大于核心线程数但小于最大线程数的时候，会将线程存入缓存队列，当缓存队列中的线程堆积满的时候，会继续创建新的线程直到线程数达到最大线程数。当线程数达到最大线程数时，再有任务进来则不会创建新的线程，而是调用handler中的拒绝处理任务的策略（默认策略为抛出异常）。
-PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,如果队并发量不确定的情况下可以使用Executors.newCachedThreadPool
-</code></pre>
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/" rel="next" title="浅谈HashMap，HashTable和concurrentHashMap的区别">
-                <i class="fa fa-chevron-left"></i> 浅谈HashMap，HashTable和concurrentHashMap的区别
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/23/POI/" rel="prev" title="POI导出bug总结">
-                POI导出bug总结 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -381,10 +297,6 @@ PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,�
 
 
           
-
-  
-
-
 
         </div>
         
@@ -405,17 +317,8 @@ PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,�
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -475,22 +378,6 @@ PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,�
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线程池原理初探"><span class="nav-number">1.</span> <span class="nav-text">线程池原理初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程池的优势"><span class="nav-number">1.1.</span> <span class="nav-text">线程池的优势</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程池原理"><span class="nav-number">2.</span> <span class="nav-text">线程池原理</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -631,10 +518,6 @@ PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,�
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

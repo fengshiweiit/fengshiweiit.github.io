@@ -1284,7 +1284,7 @@ public Docket buildDocket(){
             .globalOperationParameters(aParameters)
 ｝
 </code></pre><hr>
-<p>Ps:bootstrap.yml在application.yml之前加载</p>
+<p>Ps:bootstrap.yml在application.yml之前加载<br>具体配置demo：<a href="https://github.com/fengshiweiit/springCloudStudy" target="_blank" rel="noopener">https://github.com/fengshiweiit/springCloudStudy</a></p>
 
           
         
@@ -1620,6 +1620,134 @@ PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,�
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AlbertWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hashiqi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AlbertWei's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/" itemprop="url">浅谈HashMap，HashTable和concurrentHashMap的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T08:49:02+08:00">
+                2017-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a><center>HashMap</center></h1><h2 id="一-定义"><a href="#一-定义" class="headerlink" title="一.定义"></a>一.定义</h2><pre><code>HashMap的数据结构为数组加链式的。
+存值的时候根据key值计算出其hashCode的值然后对应数组的索引（索引上存的是一个entry），如果多个不同的key得到的hashCode值相同的话，则存储在数组对应的链上，新插入的（entry）在链的前面。
+取值的时候根据key计算出对应的hashCode，找到数组上的索引，然后遍历此索引上的entry链，取出对应的key的value值。
+</code></pre><hr>
+<h2 id="二-ConcurrentHashMap和HashTable的区别"><a href="#二-ConcurrentHashMap和HashTable的区别" class="headerlink" title="二.ConcurrentHashMap和HashTable的区别"></a>二.ConcurrentHashMap和HashTable的区别</h2><pre><code>相同点：HashTable和ConcurrentHashMap都是线程安全的，可以适用于高并发的环境。
+不同点：HashTable没有使用分段锁的机制，在迭代的时候会将整个map集合都锁定，ConcurrentHashMap使用了分段锁的机制，在迭代时只会锁定map的部分。HashTable防止并发的处理就是在每一个方法上都加了同步锁机制。
+</code></pre><hr>
+<h2 id="三-HashMap并发导致的原因"><a href="#三-HashMap并发导致的原因" class="headerlink" title="三.HashMap并发导致的原因"></a>三.HashMap并发导致的原因</h2><pre><code>在hashmap的长度达到零界并准备扩容的时候会调用一个transfer的方法，这个方法中迭代时由于next的值被另外一个线程给改变了，会导致死循环（具体也没咋看明白）
+详细请见：https://blog.csdn.net/dgutliangxuan/article/details/78779448
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1670,7 +1798,7 @@ PS:如果想要控制并发量的情况最好使用Excutors.newFixedThreadPool,�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
