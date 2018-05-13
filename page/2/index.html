@@ -237,6 +237,169 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2017/11/12/redis做分布式锁的实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AlbertWei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hashiqi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AlbertWei's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/12/redis做分布式锁的实现/" itemprop="url">redis做分布式锁的实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T16:16:35+08:00">
+                2017-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Redis实现分布式锁"><a href="#Redis实现分布式锁" class="headerlink" title="Redis实现分布式锁"></a><center>Redis实现分布式锁</center></h1><h2 id="一-主要用到的函数"><a href="#一-主要用到的函数" class="headerlink" title="一.主要用到的函数"></a>一.主要用到的函数</h2><pre><code>1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。
+2.getSet：获得设置之前的值并给其设置新的值。
+</code></pre><hr>
+<h2 id="二-redis锁实现原理"><a href="#二-redis锁实现原理" class="headerlink" title="二.redis锁实现原理"></a>二.redis锁实现原理</h2><pre><code>1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间
+jedis.setNX(&quot;redisKey&quot;, System.currentTimeMillis() + expireTime)
+
+2.在第二个线程进来的时候调用setNX方法时如果返回1则说明上一个线程已经执行完成了，redis锁已经被释放了，如果返回0则说明锁没有被释放，则可以等待或者重试
+
+3.具体代码实现(这里面有个防止线程饥饿的判断，没弄懂啥意思)
+//加锁的代码实现
+public synchronized boolean lock() {
+    int timeout = this.timeout;
+    long expires = System.currentTimeMillis() + expire + 1;
+    String expiresStr = String.valueOf(expires) + &quot;;&quot; + hostName; 
+    //如果设置成功了则返回1
+    if(jedis.setNX(lockKey, expiresStr) == 1){
+        return true;
+    }else {
+        //从redis中获得过期时间
+        String oldValue = jedis.get(lockKey);
+        if(oldValue &lt; System.currentMillis){
+            //说明已经过期了，可以获得锁
+            String currentTime = jedis.getSet(lockKey,
+            System.currentTimeMillis() + expire + 1);
+            //由于getSet()是同步的所以返回的值一定是最新的一个
+            //比较currentTime和oldValue的值，如果不相同的话说明此时被其他的线程改篡改了
+            if(currentTime.equals(oldValue)){
+                //说明没有被篡改，此时的锁已经过期了
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            //没有过期
+            return false;                
+        }
+    }
+}
+//释放锁的代码实现
+public sychronized boolean unlock() {
+    jedis.delete(lockKey);
+}
+
+详细实现代码：https://www.cnblogs.com/SimplifyIT/p/6691584.html
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://albertwei.site/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -406,7 +569,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

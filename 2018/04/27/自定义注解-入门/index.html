@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Redis实现分布式锁一.主要用到的函数1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。 2.getSet：获得设置之前的值并给其设置新的值。  二.redis锁实现原理1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间 jedis.setNX(&amp;quot;redisKey&amp;quot;, Sy">
+<meta name="description" content="自定义注解一.自定义注解时常用的几个注解1.@Target：表明该注解可以申明的位置 例:value = {ElementType.FIELD, ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER} 表明该注解可以生命到字段属性，类，方法，和参数上面 2.@Retention：表明注解加载的时机   例:RetentionPoli">
 <meta property="og:type" content="article">
-<meta property="og:title" content="redis做分布式锁的实现">
-<meta property="og:url" content="http://albertwei.site/2017/11/12/redis做分布式锁的实现/index.html">
+<meta property="og:title" content="自定义注解-入门">
+<meta property="og:url" content="http://albertwei.site/2018/04/27/自定义注解-入门/index.html">
 <meta property="og:site_name" content="AlbertWei&#39;s Blogs">
-<meta property="og:description" content="Redis实现分布式锁一.主要用到的函数1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。 2.getSet：获得设置之前的值并给其设置新的值。  二.redis锁实现原理1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间 jedis.setNX(&amp;quot;redisKey&amp;quot;, Sy">
+<meta property="og:description" content="自定义注解一.自定义注解时常用的几个注解1.@Target：表明该注解可以申明的位置 例:value = {ElementType.FIELD, ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER} 表明该注解可以生命到字段属性，类，方法，和参数上面 2.@Retention：表明注解加载的时机   例:RetentionPoli">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-15T14:52:47.502Z">
+<meta property="og:updated_time" content="2018-05-13T08:06:48.622Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="redis做分布式锁的实现">
-<meta name="twitter:description" content="Redis实现分布式锁一.主要用到的函数1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。 2.getSet：获得设置之前的值并给其设置新的值。  二.redis锁实现原理1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间 jedis.setNX(&amp;quot;redisKey&amp;quot;, Sy">
+<meta name="twitter:title" content="自定义注解-入门">
+<meta name="twitter:description" content="自定义注解一.自定义注解时常用的几个注解1.@Target：表明该注解可以申明的位置 例:value = {ElementType.FIELD, ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER} 表明该注解可以生命到字段属性，类，方法，和参数上面 2.@Retention：表明注解加载的时机   例:RetentionPoli">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://albertwei.site/2017/11/12/redis做分布式锁的实现/"/>
+  <link rel="canonical" href="http://albertwei.site/2018/04/27/自定义注解-入门/"/>
 
 
 
 
 
-  <title>redis做分布式锁的实现 | AlbertWei's Blogs</title>
+  <title>自定义注解-入门 | AlbertWei's Blogs</title>
   
 
 
@@ -237,7 +237,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2017/11/12/redis做分布式锁的实现/">
+    <link itemprop="mainEntityOfPage" href="http://albertwei.site/2018/04/27/自定义注解-入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="AlbertWei">
@@ -254,7 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">redis做分布式锁的实现</h1>
+          <h1 class="post-title" itemprop="name headline">自定义注解-入门</h1>
         
 
         <div class="post-meta">
@@ -266,8 +266,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T16:16:35+08:00">
-                2017-11-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-27T11:35:00+08:00">
+                2018-04-27
               </time>
             
 
@@ -304,51 +304,64 @@
       
 
       
-        <h1 id="Redis实现分布式锁"><a href="#Redis实现分布式锁" class="headerlink" title="Redis实现分布式锁"></a><center>Redis实现分布式锁</center></h1><h2 id="一-主要用到的函数"><a href="#一-主要用到的函数" class="headerlink" title="一.主要用到的函数"></a>一.主要用到的函数</h2><pre><code>1.setNX（key, value）: 如果key不存在的设置value值，否则就不设置，设置成功则返回1，设置失败则返回0。
-2.getSet：获得设置之前的值并给其设置新的值。
-</code></pre><hr>
-<h2 id="二-redis锁实现原理"><a href="#二-redis锁实现原理" class="headerlink" title="二.redis锁实现原理"></a>二.redis锁实现原理</h2><pre><code>1.在第一个线程进来的时候调用setNX方法设置名称和对应的时间戳加过期时间
-jedis.setNX(&quot;redisKey&quot;, System.currentTimeMillis() + expireTime)
+        <h1 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a><center>自定义注解</center></h1><h2 id="一-自定义注解时常用的几个注解"><a href="#一-自定义注解时常用的几个注解" class="headerlink" title="一.自定义注解时常用的几个注解"></a>一.自定义注解时常用的几个注解</h2><h3 id="1-Target："><a href="#1-Target：" class="headerlink" title="1.@Target："></a>1.@Target：</h3><pre><code>表明该注解可以申明的位置
+例:value = {ElementType.FIELD, ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER}
+表明该注解可以生命到字段属性，类，方法，和参数上面
+</code></pre><h3 id="2-Retention：表明注解加载的时机"><a href="#2-Retention：表明注解加载的时机" class="headerlink" title="2.@Retention：表明注解加载的时机"></a>2.@Retention：表明注解加载的时机</h3><p>   例:RetentionPolicy.RUNTIME,表明在运行的时候可以加载，一般情况下都使用这个，<br>   因为反射实现代码的时候是在程序运行时执行的。 </p>
+<h3 id="3-Inherited"><a href="#3-Inherited" class="headerlink" title="3.@Inherited"></a>3.@Inherited</h3><p>   表明被自定义的注解修饰的类在这个类的子类中也起作用<br>   例：在FatherClass上声明了一个自定义注解，在SonClass上也继承了该注解</p>
+<hr>
+<h2 id="二-反射实现自定义注解的属性注入"><a href="#二-反射实现自定义注解的属性注入" class="headerlink" title="二.反射实现自定义注解的属性注入"></a>二.反射实现自定义注解的属性注入</h2><pre><code>@TestAnnotation(age = 12)
+private Integer id;
 
-2.在第二个线程进来的时候调用setNX方法时如果返回1则说明上一个线程已经执行完成了，redis锁已经被释放了，如果返回0则说明锁没有被释放，则可以等待或者重试
+@TestAnnotation(name = &quot;lisi&quot;)
+private String name;
 
-3.具体代码实现(这里面有个防止线程饥饿的判断，没弄懂啥意思)
-//加锁的代码实现
-public synchronized boolean lock() {
-    int timeout = this.timeout;
-    long expires = System.currentTimeMillis() + expire + 1;
-    String expiresStr = String.valueOf(expires) + &quot;;&quot; + hostName; 
-    //如果设置成功了则返回1
-    if(jedis.setNX(lockKey, expiresStr) == 1){
-        return true;
-    }else {
-        //从redis中获得过期时间
-        String oldValue = jedis.get(lockKey);
-        if(oldValue &lt; System.currentMillis){
-            //说明已经过期了，可以获得锁
-            String currentTime = jedis.getSet(lockKey,
-            System.currentTimeMillis() + expire + 1);
-            //由于getSet()是同步的所以返回的值一定是最新的一个
-            //比较currentTime和oldValue的值，如果不相同的话说明此时被其他的线程改篡改了
-            if(currentTime.equals(oldValue)){
-                //说明没有被篡改，此时的锁已经过期了
-                return true;
-            }else {
-                return false;
-            }
+例：要将12注入id中，lisi注入name中
+
+//获得这个类的所有属性
+Field[] declaredFields = testDemoClass.getDeclaredFields();
+for (Field declaredField : declaredFields) {
+    //获得有自定义注解的所有字段  
+    TestAnnotation annotation = declaredField.getAnnotation(TestAnnotation.class);
+    if(annotation != null){
+        //获得自定义注解中的属性值
+        String name = annotation.name();
+        int age = annotation.age();
+        declaredField.setAccessible(true);
+        //获得属性的类型
+        Type genericType = declaredField.getGenericType();
+        String type = genericType.toString();
+        if (type.equals(&quot;class java.lang.Integer&quot;)){
+            //给属性设置值
+            declaredField.set(testDemo, age);
+        }else if (type.equals(&quot;class java.lang.String&quot;)){
+            declaredField.set(testDemo, name);
         }else {
-            //没有过期
-            return false;                
+            return;
         }
     }
 }
-//释放锁的代码实现
-public sychronized boolean unlock() {
-    jedis.delete(lockKey);
+</code></pre><hr>
+<h2 id="三-自定义注解在方法上实现方法的形参注入"><a href="#三-自定义注解在方法上实现方法的形参注入" class="headerlink" title="三.自定义注解在方法上实现方法的形参注入"></a>三.自定义注解在方法上实现方法的形参注入</h2><pre><code>try {
+    Class&lt;TestDemo&gt; testDemoClass = TestDemo.class;
+    Method[] declaredMethods = testDemoClass.getDeclaredMethods();
+    for (Method declaredMethod : declaredMethods) {
+        TestAnnotation annotation = declaredMethod.getAnnotation(TestAnnotation.class);
+        if (annotation != null){
+            int parameterCount = declaredMethod.getParameterCount();
+            if (parameterCount == 2){
+                declaredMethod.invoke(testDemoClass.newInstance(),1, &quot;2&quot;);
+            }else {
+                declaredMethod.invoke(testDemoClass.newInstance(), null);
+            }
+        }
+    }
+} catch (Exception e) {
+e.printStackTrace();
 }
+</code></pre><hr>
+<p>PS：以上只是自定义注解中简单的使用，更深入的在自定义注解中定义Class，接下来在项目中深入了再更新</p>
 
-详细实现代码：https://www.cnblogs.com/SimplifyIT/p/6691584.html
-</code></pre>
       
     </div>
     
@@ -372,8 +385,8 @@ public sychronized boolean unlock() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/03/浅谈HashMap，HashTable和concurrentHashMap的区别/" rel="next" title="浅谈HashMap，HashTable和concurrentHashMap的区别">
-                <i class="fa fa-chevron-left"></i> 浅谈HashMap，HashTable和concurrentHashMap的区别
+              <a href="/2018/03/16/mysql优化/" rel="next" title="mysql优化">
+                <i class="fa fa-chevron-left"></i> mysql优化
               </a>
             
           </div>
@@ -381,10 +394,6 @@ public sychronized boolean unlock() {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/24/线程池原理初探/" rel="prev" title="线程池原理初探">
-                线程池原理初探 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -516,7 +525,7 @@ public sychronized boolean unlock() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis实现分布式锁"><span class="nav-number">1.</span> <span class="nav-text">Redis实现分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-主要用到的函数"><span class="nav-number">1.1.</span> <span class="nav-text">一.主要用到的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-redis锁实现原理"><span class="nav-number">1.2.</span> <span class="nav-text">二.redis锁实现原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义注解"><span class="nav-number">1.</span> <span class="nav-text">自定义注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-自定义注解时常用的几个注解"><span class="nav-number">1.1.</span> <span class="nav-text">一.自定义注解时常用的几个注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Target："><span class="nav-number">1.1.1.</span> <span class="nav-text">1.@Target：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Retention：表明注解加载的时机"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.@Retention：表明注解加载的时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Inherited"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.@Inherited</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-反射实现自定义注解的属性注入"><span class="nav-number">1.2.</span> <span class="nav-text">二.反射实现自定义注解的属性注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-自定义注解在方法上实现方法的形参注入"><span class="nav-number">1.3.</span> <span class="nav-text">三.自定义注解在方法上实现方法的形参注入</span></a></li></ol></li></ol></div>
             
 
           </div>
